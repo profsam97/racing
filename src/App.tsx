@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Box, Typography, Grid2, Container } from '@mui/material';
+import { useGameStore } from './store';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { gameState } = useGameStore();
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.100', p: 4 }}>
+      <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: 'text.primary'
+          }}
+        >
+          Typing Race
+        </Typography>
+    
+        {gameState.status === 'countdown' && (
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 'bold',
+              color: 'primary.main',
+              textAlign: 'center'
+            }}
+          >
+            {gameState.countdown}
+          </Typography>
+        )}
+       
+     
+        
+        <Grid2 container spacing={4}>
+          <Grid2 size={{xs:12, md:8}}>
+
+            </Grid2>
+          <Grid2 size={{xs:12, md:4}}>
+          </Grid2>
+        </Grid2>
+      </Container>
+    </Box>
+  );
 }
 
-export default App
+export default App;
