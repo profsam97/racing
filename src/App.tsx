@@ -1,6 +1,7 @@
 import { Box, Typography, TextField, Button, Paper, Grid2, Container } from '@mui/material';
 import { useGameStore } from './store';
 import { useState } from 'react';
+import { Leaderboard } from './components/Leaderboard';
 
 function App() {
   const { gameState } = useGameStore();
@@ -159,6 +160,7 @@ function App() {
 
             </Grid2>
           <Grid2 size={{xs:12, md:4}}>
+            <Leaderboard players={gameState.players}/>
           </Grid2>
         </Grid2>
       </Container>
