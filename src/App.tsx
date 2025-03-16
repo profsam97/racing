@@ -86,6 +86,16 @@ function App() {
               Join Game
             </Button>
           </Box>
+          {gameStarted && (
+            <Box sx={{ mt: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ textAlign: 'center', color: 'text.secondary' }}
+              >
+                Game has already started. Please wait for the next round.
+              </Typography>
+            </Box>
+          )}
         </Paper>
       </Box>
     );
@@ -119,8 +129,31 @@ function App() {
           </Typography>
         )}
        
-     
-        
+       {gameState.status === 'waiting' && (
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 'bold',
+              color: 'text.primary',
+              textAlign: 'center'
+            }}
+          >
+            Waiting for other players to join...
+          </Typography>
+        )}
+
+        {gameState.status === 'racing' && gameState.timeLeft !== undefined && (
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: 'monospace',
+              fontWeight: 'bold',
+              textAlign: 'center'
+            }}
+          >
+            {Math.floor(gameState.timeLeft / 60)}:{(gameState.timeLeft % 60).toString().padStart(2, '0')}
+          </Typography>
+        )}
         <Grid2 container spacing={4}>
           <Grid2 size={{xs:12, md:8}}>
 
