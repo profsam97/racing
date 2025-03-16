@@ -2,6 +2,7 @@ import { Box, Typography, TextField, Button, Paper, Grid2, Container } from '@mu
 import { useGameStore } from './store';
 import { useState } from 'react';
 import { Leaderboard } from './components/Leaderboard';
+import { RaceTrack } from './components/RaceTrack';
 
 function App() {
   const { gameState } = useGameStore();
@@ -155,9 +156,9 @@ function App() {
             {Math.floor(gameState.timeLeft / 60)}:{(gameState.timeLeft % 60).toString().padStart(2, '0')}
           </Typography>
         )}
+        <RaceTrack players={gameState.players} />
         <Grid2 container spacing={4}>
           <Grid2 size={{xs:12, md:8}}>
-
             </Grid2>
           <Grid2 size={{xs:12, md:4}}>
             <Leaderboard players={gameState.players}/>
