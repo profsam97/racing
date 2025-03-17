@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Leaderboard } from './components/Leaderboard';
 import { RaceTrack } from './components/RaceTrack';
 import { wsClient } from './websocket/client';
+import { TypingArea } from './components/TypingArea';
 
 function App() {
   const { gameState } = useGameStore();
@@ -164,6 +165,7 @@ function App() {
         <RaceTrack players={gameState.players} />
         <Grid2 container spacing={4}>
           <Grid2 size={{xs:12, md:8}}>
+            <TypingArea />
             </Grid2>
           <Grid2 size={{xs:12, md:4}}>
             <Leaderboard players={gameState.players}/>
