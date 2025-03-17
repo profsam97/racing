@@ -135,6 +135,7 @@ export const TypingArea: React.FC = () => {
           value={playerInput}
           onChange={handleInputChange}
           disabled={isInputDisabled}
+          onPaste={(e) => e.preventDefault()}
           placeholder={status === 'racing' ? 'Start typing...' : 'Waiting for others to join...'}
           inputProps={{
             style: { fontFamily: 'monospace' }

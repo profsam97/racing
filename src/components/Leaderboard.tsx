@@ -12,7 +12,7 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ players }) => {
   const sortedPlayers = [...players].sort((a, b) => b.wpm - a.wpm);
 
   return (
-    <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
+    <Paper elevation={3} sx={{ p: 3, borderRadius: 2, mt:8 }}>
       <Box display="flex" alignItems="center" gap={1} mb={2}>
                 <SvgIcon
             component={Trophy} 
