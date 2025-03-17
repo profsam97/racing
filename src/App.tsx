@@ -26,6 +26,10 @@ function App() {
       setHasJoined(true);
     }
   };
+  const handleReplay = () => {
+    wsClient.replay();
+  };
+
   if (!hasJoined) {
     return (
       <Box
@@ -161,6 +165,17 @@ function App() {
           >
             {Math.floor(gameState.timeLeft / 60)}:{(gameState.timeLeft % 60).toString().padStart(2, '0')}
           </Typography>
+        )}
+        {gameState.status === 'finished' && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              onClick={handleReplay}
+              variant="contained"
+              color="primary"
+            >
+              Play Again
+            </Button>
+          </Box>
         )}
         <RaceTrack players={gameState.players} />
         <Grid2 container spacing={4}>

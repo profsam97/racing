@@ -30,6 +30,10 @@ class WebSocketClient {
     if (!this.socket) return;
     this.socket.emit('joinGame', { name: playerName });
   }
+  replay() {
+    if (!this.socket) return;
+    this.socket.emit('replay');
+  }
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();

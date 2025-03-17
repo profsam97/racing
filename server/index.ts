@@ -68,6 +68,9 @@ io.on('connection', (socket) => {
   socket.on('reset', () => {
     resetGame();
   });
+  socket.on('replay', () => {
+    validateCountdown()
+  });
   socket.on('gameStarted', () => {  
     if(checkIfGameHasStarted())
     {
@@ -116,9 +119,8 @@ function startGameTimer() {
 
       if (gameState.timeLeft === 0) {
         setTimeout(() => {
-
+          endGame();
         },3000)
-        endGame();
       }
     }
   }, 1000);
