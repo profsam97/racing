@@ -17,6 +17,15 @@ class WebSocketClient {
       console.log('Received game state:', state);
       useGameStore.getState().updateGameState(state);
     });
+    this.socket.on('joinedRoom', ({ roomId }: { roomId: string }) => {
+      console.log('Joined room:', roomId);
+      useGameStore.getState().setCurrentRoomId(roomId);
+    });
+
+    this.socket.on('hasStarted', (hasStarted: boolean) => {
+      console.log('Game has started:', hasStarted);
+  
+    });
   }
   updateProgress(update: ProgressUpdate) {
     if (!this.socket) return;

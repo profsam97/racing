@@ -12,3 +12,10 @@ export interface GameState {
   countdown: number;
   timeLeft: number;
 }
+
+export interface GameRoom {
+  id: string;
+  gameState: GameState;
+  isTimerPaused: boolean;
+  gameTimer: NodeJS.Timeout | null;
+}
