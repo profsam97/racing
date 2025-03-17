@@ -1,14 +1,18 @@
 import { Box, Typography, TextField, Button, Paper, Grid2, Container } from '@mui/material';
 import { useGameStore } from './store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Leaderboard } from './components/Leaderboard';
 import { RaceTrack } from './components/RaceTrack';
+import { wsClient } from './websocket/client';
 
 function App() {
   const { gameState } = useGameStore();
   const [hasJoined, setHasJoined] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [username, setUsername] = useState('');
+  useEffect(() => {
+    wsClient.connect();
+  }, []);
 
   const handleJoinGame = (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +21,7 @@ function App() {
         setGameStarted(true);
         return
       }
+      wsClient.joinGame(username.trim());
       setHasJoined(true);
     }
   };
