@@ -46,8 +46,10 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                 display: 'flex',
                 alignItems: 'flex-start', 
                 gap: 1,
-                left: `${player.progress}%`,
-                transform: 'translate(-50%, -100%)', 
+                // Calculate position so car stops exactly at finish line when progress is 100%
+                // When progress is 100%, we want the car to be positioned so its right edge aligns with the finish line
+                left: `calc(${player.progress}% - ${(player.progress / 100) * 120}px)`,
+                transform: 'translate(-33%, -100%)', 
                 transition: 'left 0.3s ease-out',
                 zIndex: 2,
               }}
@@ -75,10 +77,10 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                 typography: 'body2', 
                 fontWeight: 'medium',
                 color: '#333',
-                marginTop: '30px',
+                marginTop: '20px',
               }}>
                 {player.name}
-                <Typography variant="caption" sx={{ display: 'block', color: '#666' }}>
+                <Typography variant="caption" sx={{ display: 'flex', flexDirection: 'row', textWrap: 'nowrap', color: '#666' }}>
                   {player.wpm} WPM
                 </Typography>
               </Box>
@@ -100,11 +102,14 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
           height: '100%', 
           width: '2px', 
           bgcolor: '#000',
+          ml:6.1,
           position: 'relative',
         }} />
                 <Box sx={{ 
           height: '100%', 
           width: '2px', 
+          zIndex: 3,
+          mr:5,
           bgcolor: '#000',
           position: 'relative',
         }} />

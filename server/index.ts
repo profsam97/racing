@@ -8,14 +8,18 @@ const httpServer = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('Socket.IO server is running!');
 });
+
+const url = process.env.NODE_ENV === 'production' ? 'https://racetyping.vercel.app' : 'http://localhost:5173';
+
+console.log(url)
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: 'https://racetyping.vercel.app',
     methods: ["GET", "POST"]
   }
 });
 const GAME_DURATION = 120; // 2 minutes in seconds
-const MIN_PLAYERS_TO_START = 3;
+const MIN_PLAYERS_TO_START = 4;
 
 // Store all game rooms
 const gameRooms = new Map<string, GameRoom>();
@@ -276,6 +280,6 @@ io.on('connection', (socket : Socket) => {
   });
 });
 
-httpServer.listen(3001, () => {
-  console.log('Server running on port 3001');
+httpServer.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
