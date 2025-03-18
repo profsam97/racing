@@ -14,7 +14,7 @@ const url = process.env.NODE_ENV === 'production' ? 'https://racetyping.vercel.a
 console.log(url)
 const io = new Server(httpServer, {
   cors: {
-    origin: 'https://racetyping.vercel.app',
+    origin: url,
     methods: ["GET", "POST"]
   }
 });
