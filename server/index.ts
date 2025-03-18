@@ -46,7 +46,7 @@ function createGameRoom(): GameRoom {
 function findAvailableRoom(): GameRoom {
   // First, look for a waiting room
   for (const room of gameRooms.values()) {
-    if (room.gameState.status === 'waiting') {
+    if (room.gameState.status === 'waiting' || room.gameState.status === 'countdown') {
       return room;
     }
   }

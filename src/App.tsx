@@ -114,7 +114,7 @@ function App() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'grey.100', p: 4 }}>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#fff', p: 4 }}>
       <Container maxWidth="lg" sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         <Typography
           variant="h4"

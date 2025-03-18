@@ -115,7 +115,7 @@ export const TypingArea: React.FC = () => {
   const isInputDisabled = status !== 'racing' || isCompleted || timeLeft === 0;
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '42rem', mx: 'auto', mt: 8 }}>
+    <Box sx={{ width: '100%', maxWidth: '42rem', mx: 'auto', mt: 8, bgcolor: 'grey.100' }}>
       <Paper elevation={3} sx={{ p: 6, borderRadius: 2 }}>
         <Typography 
           variant="body1" 
@@ -136,9 +136,13 @@ export const TypingArea: React.FC = () => {
           onChange={handleInputChange}
           disabled={isInputDisabled}
           onPaste={(e) => e.preventDefault()}
-          placeholder={status === 'racing' ? 'Start typing...' : 'Waiting for others to join...'}
-          inputProps={{
-            style: { fontFamily: 'monospace' }
+          placeholder={status === 'racing' ? 'Start typing...' : status === 'countdown' ? 'getting ready' :  'Waiting ...'}
+          slotProps={{
+            input: {
+              style : {
+                fontFamily: 'monospace'
+              }
+            }
           }}
           sx={{
             '& .MuiOutlinedInput-root': {
