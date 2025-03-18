@@ -8,6 +8,7 @@ class WebSocketClient {
   connect() {
     if (this.socket) return;
     this.socket = io(baseUrl);
+    console.log(baseUrl)
     this.socket.on('connect', () => {
       console.log('Connected to server');
     });
