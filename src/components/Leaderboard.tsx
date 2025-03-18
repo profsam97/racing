@@ -50,11 +50,11 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ players }) => {
               <ListItemText 
                 primary={player.name}
                 secondary={
-                  <Box display="flex" gap={2}>
-                    <Typography variant="body2" color="text.secondary">
+                  <Box display="flex" gap={2} component="span">
+                    <Typography variant="body2" color="text.secondary" component="span">
                       WPM: {player.wpm}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" component="span">
                       Accuracy: {player.accuracy}%
                     </Typography>
                   </Box>

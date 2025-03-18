@@ -7,13 +7,13 @@ class WebSocketClient {
   private socket: Socket | null = null;
   connect() {
     if (this.socket) return;
-    this.socket = io(baseUrl);
+    this.socket =   process.env.NODE_ENV === 'development' ?  io(baseUrl) : io()
+    this.socket =  io(baseUrl);
     console.log(baseUrl)
     this.socket.on('connect', () => {
       console.log('Connected to server');
     });
     this.socket.on('gameState', (state: GameState) => {
-      console.log('Received game state:', state);
       useGameStore.getState().updateGameState(state);
     });
     this.socket.on('joinedRoom', ({ roomId }: { roomId: string }) => {
