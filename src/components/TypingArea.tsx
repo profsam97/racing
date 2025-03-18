@@ -54,7 +54,7 @@ export const TypingArea: React.FC = () => {
   }, [status, setPlayerInput]);
   const isInputDisabled = status !== 'racing' || isCompleted || timeLeft === 0;
   return (
-    <Box sx={{ width: '100%', maxWidth: '42rem', mx: 'auto', mt: 8, bgcolor: 'grey.100' }}>
+    <Box sx={{ width: '100%', maxWidth: '42rem', mx: 'auto', mt: 3, bgcolor: 'grey.100' }}>
       <Paper elevation={3} sx={{ p: 6, borderRadius: 2 }}>
         <Typography 
           variant="body1" 
