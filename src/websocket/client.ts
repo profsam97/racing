@@ -1,18 +1,16 @@
 import { io, Socket } from 'socket.io-client';
 import { useGameStore } from '../store';
 import { GameState, ProgressUpdate } from '../types';
+import { baseUrl } from '../utils/BaseUrl';
 
 class WebSocketClient {
   private socket: Socket | null = null;
   connect() {
     if (this.socket) return;
-    
-    this.socket = io('http://localhost:3001');
-
+    this.socket = io(baseUrl);
     this.socket.on('connect', () => {
       console.log('Connected to server');
     });
-
     this.socket.on('gameState', (state: GameState) => {
       console.log('Received game state:', state);
       useGameStore.getState().updateGameState(state);
@@ -21,7 +19,6 @@ class WebSocketClient {
       console.log('Joined room:', roomId);
       useGameStore.getState().setCurrentRoomId(roomId);
     });
-
     this.socket.on('hasStarted', (hasStarted: boolean) => {
       console.log('Game has started:', hasStarted);
   
@@ -50,5 +47,4 @@ class WebSocketClient {
     }
   }
 }
-
 export const wsClient = new WebSocketClient();
