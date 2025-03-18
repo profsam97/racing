@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Backend service
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: typingrace-server
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env.docker
+    volumes:
+      - ./server:/app/server
+    restart: unless-stopped
+
+  # Frontend service
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    container_name: typingrace-client
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+      - VITE_SERVER_URL=${SERVER_URL:-http://localhost:3000}
+    env_file:
+      - .env.docker
+    volumes:
+      - ./src:/app/src
+      - ./index.html:/app/index.html
+    depends_on:
+      - server
+    restart: unless-stopped

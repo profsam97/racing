@@ -9,7 +9,7 @@ const httpServer = http.createServer((req, res) => {
   res.end('Socket.IO server is running!');
 });
 
-const url = process.env.NODE_ENV === 'production' ? 'https://racetyping.vercel.app' : 'http://localhost:5173';
+const url = process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL : 'http://localhost:5173';
 
 console.log(url)
 const io = new Server(httpServer, {
@@ -18,7 +18,7 @@ const io = new Server(httpServer, {
     methods: ["GET", "POST"]
   }
 });
-const GAME_DURATION = 120; // 2 minutes in seconds
+const GAME_DURATION = 80;  // 80 seconds
 const MIN_PLAYERS_TO_START = 4;
 
 // Store all game rooms
@@ -202,7 +202,7 @@ io.on('connection', (socket : Socket) => {
      // Send current game state to the player
      socket.emit('gameState', room.gameState);
      socket.emit('joinedRoom', { roomId: room.id });
-    // Start countdown if the number of players is more than  is 3
+    // Start countdown if the number of players is more than  is 4
     validateCountdown(room)
     
   // Broadcast updated game state to all players in the room
@@ -252,7 +252,7 @@ io.on('connection', (socket : Socket) => {
     });
   socket.on('disconnect', () => {
     console.log('disconnected');
-       // Find the room the player is in
+       //we find the room the player is in
        const room = findPlayerRoom(socket.id);
        if (!room) return;
        const index = room.gameState.players.findIndex((p: Player) => p.id === socket.id);
@@ -268,11 +268,10 @@ io.on('connection', (socket : Socket) => {
             console.log(`Timer paused in room ${room.id} due to player count below ${MIN_PLAYERS_TO_START}`);
           }
         }
-
       // Broadcast updated game state to all players in the room
       io.to(room.id).emit('gameState', room.gameState);
       
-      // If room is empty, remove it
+      // If room is empty, we remove it
       if (room.gameState.players.length === 0) {
         if (room.gameTimer) {
           clearInterval(room.gameTimer);
@@ -283,7 +282,7 @@ io.on('connection', (socket : Socket) => {
     }
   });
 });
-
-httpServer.listen(3000, () => {
-  console.log('Server running on port 3000');
+const port = process.env.PORT || 3000;
+httpServer.listen(port, () => {
+  console.log('Server running on port', port);
 });
