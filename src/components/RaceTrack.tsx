@@ -2,11 +2,9 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Player } from '../types';
 import { images } from '../data/images';
-
 interface RaceTrackProps {
   players: Player[];
 }
-
 export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
   return (
     <Box
@@ -22,16 +20,13 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
       }}
     >
       {players.map((player, index) => {
-        
         return (
           <Box key={player.id} sx={{ display: 'flex', height: 80}} >
-            {/* Lane indicator for this player - simple dashed yellow line */}
             <Box
               sx={{
                 position: 'absolute',
                 left: 0,
-                right: '2px', // Stop at the finish line
-                // top: `${lanePosition}%`,
+                right: '2px', 
                 height: '2px',
                 transform: 'translateY(-50%)',
                 zIndex: 1,
@@ -45,17 +40,14 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                 }
               }}
             />
-            
-            {/* Player car and name */}
             <Box
               sx={{
                 position: 'absolute',
                 display: 'flex',
-                alignItems: 'flex-start', // Align to top
+                alignItems: 'flex-start', 
                 gap: 1,
                 left: `${player.progress}%`,
-                // top: `${lanePosition}%`, // Position at the line
-                transform: 'translate(-50%, -100%)', // Move up by 100% of its height
+                transform: 'translate(-50%, -100%)', 
                 transition: 'left 0.3s ease-out',
                 zIndex: 2,
               }}
@@ -74,7 +66,7 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                   width={120}
                   sx={{ 
                     objectFit: 'contain',
-                    marginBottom: '-4px', // Add space between car and line
+                    marginBottom: '-4px', 
                   }}
                   alt={`${player.name}'s car`}
                 />
@@ -83,7 +75,7 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                 typography: 'body2', 
                 fontWeight: 'medium',
                 color: '#333',
-                marginTop: '30px', // Align text with the car
+                marginTop: '30px',
               }}>
                 {player.name}
                 <Typography variant="caption" sx={{ display: 'block', color: '#666' }}>
@@ -94,9 +86,7 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
           </Box>
         );
       })}
-      
-      {/* Simple start and finish lines */}
-      <Box 
+            <Box 
         sx={{ 
           position: 'absolute', 
           inset: 0, 
@@ -106,16 +96,13 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
           pointerEvents: 'none',
         }}
       >
-        {/* Start line */}
         <Box sx={{ 
           height: '100%', 
           width: '2px', 
           bgcolor: '#000',
           position: 'relative',
         }} />
-        
-        {/* Finish line */}
-        <Box sx={{ 
+                <Box sx={{ 
           height: '100%', 
           width: '2px', 
           bgcolor: '#000',

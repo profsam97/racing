@@ -2,15 +2,12 @@ import React from 'react';
 import { Box, Typography, Paper, List, ListItem, ListItemAvatar, ListItemText, Avatar, Divider, SvgIcon } from '@mui/material';
 import { Trophy } from 'lucide-react';
 import { Player } from '../types';
-
 interface LeaderboardProps {
   players: Player[];
 }
-
 export const Leaderboard: React.FC<LeaderboardProps> = ({ players }) => {
     //we rank the players based on their typing speed
   const sortedPlayers = [...players].sort((a, b) => b.wpm - a.wpm);
-
   return (
     <Paper elevation={3} sx={{ p: 3, borderRadius: 2, mt:8 }}>
       <Box display="flex" alignItems="center" gap={1} mb={2}>
