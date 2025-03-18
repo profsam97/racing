@@ -20,6 +20,7 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
       }}
     >
       {players.map((player, index) => {
+        const progress = player.progress > 100 ? 100 : player.progress;
         return (
           <Box key={player.id} sx={{ display: 'flex', height: 80}} >
             <Box
@@ -46,9 +47,7 @@ export const RaceTrack: React.FC<RaceTrackProps> = ({ players }) => {
                 display: 'flex',
                 alignItems: 'flex-start', 
                 gap: 1,
-                // Calculate position so car stops exactly at finish line when progress is 100%
-                // When progress is 100%, we want the car to be positioned so its right edge aligns with the finish line
-                left: `calc(${player.progress}% - ${(player.progress / 100) * 120}px)`,
+                left: `calc(${progress}% - ${(progress / 100) * 120}px)`,
                 transform: 'translate(-33%, -100%)', 
                 transition: 'left 0.3s ease-out',
                 zIndex: 2,

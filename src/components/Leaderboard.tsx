@@ -6,8 +6,15 @@ interface LeaderboardProps {
   players: Player[];
 }
 export const Leaderboard: React.FC<LeaderboardProps> = ({ players }) => {
-    //we rank the players based on their typing speed
-  const sortedPlayers = [...players].sort((a, b) => b.wpm - a.wpm);
+
+  const sortedPlayers = [...players].sort((a, b) => {
+
+    // sort by progress percentage
+    if (a.progress !== b.progress) return b.progress - a.progress;
+    
+    // If progress is the same, we use WPM as tiebreaker
+    return b.wpm - a.wpm;
+  });
   return (
     <Paper elevation={3} sx={{ p: 3, borderRadius: 2, mt:8 }}>
       <Box display="flex" alignItems="center" gap={1} mb={2}>

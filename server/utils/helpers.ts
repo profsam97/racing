@@ -1,5 +1,5 @@
 const quotes: string[] = [
-    "In three words I can sum up everything I’ve learned about life: it goes on. It reminds us to keep moving, even when it's hard.",
+    "In three words I can sum up everything I have learned about life: it goes on. It reminds us to keep moving, even when it's hard.",
     "The only way to do great work is to love what you do. Don't settle until you find it. You'll know when you do.",
     "The best and most beautiful things must be felt with the heart. True beauty is within emotions and connections.",
     "Life is what happens when you're busy making other plans. Appreciate the spontaneity of the present.",

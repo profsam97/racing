@@ -166,6 +166,10 @@ function checkIfGameHasStarted(room: GameRoom) {
   return room.gameState.status === 'racing';
 }
 
+function rankPlayers(players: Player[]): number {
+  const completedList = players.filter((p: Player) => p.progress >= 100).length;
+  return players.length - completedList
+}
 // Create an initial waiting room
 createGameRoom();
 
@@ -217,14 +221,14 @@ io.on('connection', (socket : Socket) => {
       
       // Check if player has finished
       if (progress >= 100) {
-        player.progress = 100;
+        player.progress = 100 + rankPlayers(room.gameState.players);
         checkGameEnd(room);
       }
       
       io.to(room.id).emit('gameState', room.gameState);
     }
   });
-
+  
   socket.on('reset', () => {
     const room = findPlayerRoom(socket.id);
     if (room) {
