@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
+# Type Racing Multiplaying game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is home to a full stack application for a real-time multiplayer typing racing game. 
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Real time Multiplayer:**
 
-## Expanding the ESLint configuration
+  - **No of players:** This game kickoffs when there are at least 4 players
+  - **Username:** Allows players to input a username.
+  - **On disconnect:** if a player disconnects and the number of players drop below the minimum, which is 4. the game pause until the number of players become 4 or more, i explained more at the note section.
+  - **Realtime Progress:** All users can monitor/view their progress in realtime.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **UI:**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+  - **Leaderboard:** A leaderboard component that displays players rank in realtime.
+  - **Typing Area:** Allows users to type the words.
+  - **Rendertext:** Shows green for correct characters and red for wrong characters.
+  - **Prevent Copy/pasting:** Prevent users from copying the text and pasting the text in t.
+  - **Disable on Completion:** Prevent players from typing once the text has been completed/timer is up or paused .
+  - **Feedback:** Shows suitable feedback such as a success text onces the player finishes typing or error when player is still typing but time is up.
+
+## Other Features
+
+### Dockerization
+
+Each service is containerized using **Docker**, ensuring consistent deployment across environments.
+
+### Husky for Development
+
+I've set up **Husky** to streamline development workflows. It enforces code quality checks and runs tests before commits.
+
+## Getting Started
+Clone the repository:
+
+```bash
+git clone https://github.com/profsam97/racing.git
+```
+then 
+```bash
+cd racing
+```
+### Running the app
+
+There are two ways to achieve this:
+1. `Run locally`
+
+First, install the dependencies:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### Then start the dev and server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+The below command will start both the server and the client
+```bash
+npm run dev 
 ```
+## VIew the app
+### view by visiting localhost:5173
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+2. `Run in a Docker environment`
+
+```bash
+docker compose up -d.
+```
+### To see the app visit ip address of the vm/server
+
+### Technologies Used
+
+- Typescript
+- Node.js
+- React.js
+- Socket.io 
+- Docker
+- Zustand
+- MUI
+- Uuid
+- Websocket
+
+
