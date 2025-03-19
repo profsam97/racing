@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint-staged": "lint-staged --config lint-staged.js",
     "preview": "vite preview",
     "server": "tsx watch server/index.ts",
     "husky-install": "husky",
@@ -37,6 +38,7 @@
     "tsx": "^4.7.0",
     "@types/uuid": "^10.0.0",
     "@types/ws": "^8.5.10",
+    "lint-staged": "^15.2.10",
     "socket.io": "^4.7.4",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
