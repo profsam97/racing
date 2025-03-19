@@ -9,7 +9,7 @@ export const calculateProgress = (targetText: string, currentInput: string): num
     return (correctChars / targetText.length) * 100;
   };
 
-export   const calculateWPM = (charCount: number, startTime: number | null): number => {
+export   const calclateWPM = (charCount: number, startTime: number | null): number => {
     if (!startTime) return 0;
     const minutes = (Date.now() - startTime) / 60000; // Convert ms to minutes
     const words = charCount / 5; 
