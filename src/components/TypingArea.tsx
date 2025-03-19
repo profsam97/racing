@@ -18,7 +18,7 @@ export const TypingArea: React.FC = () => {
     const newInput = e.target.value;
     setPlayerInput(newInput);
     if (!startTime) {     
-      setStartTime(Date.no2()); // if time is not set, we set it to the current time
+      setStartTime(Date.now()); // if time is not set, we set it to the current time
     }
     let newErrors = 0;  //we use this to track number of errors
     for (let i = 0; i < Math.max(newInput.length, previousInput.length); i++) {
