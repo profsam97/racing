@@ -1,8 +1,11 @@
 # Typing Race - Multiplayer Racing Game
 
-This repository hosts a full-stack real-time multiplayer typing racing game where players compete to type text passages as quickly and accurately as possible.
+This repository hosts a full-stack real-time multiplayer typing racing game where players compete to type text as quickly and accurately as possible.
 
 You can view the production version here: [https://dos7173mxyz0u.cloudfront.net](https://dos7173mxyz0u.cloudfront.net)
+
+[Click here to jump to setup](#getting-started)
+
 
 ## Game Features
 
@@ -10,7 +13,8 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 
 - **Player Requirements:** The game requires at least 4 players to start
 - **Username System:** Players can create a personalized racing identity
-- **Disconnect Handling:** If a player disconnects and the count drops below 4, the game pauses until enough players rejoin
+- **Disconnect Handling:** If a player disconnects and the count drops below 4, the game pauses until enough players rejoin. [more about this here](#handling-disconnection)
+
 - **Real-time Progress:** All players can see everyone's position on the race track in real-time
 
 ### Racing Interface
@@ -33,8 +37,8 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 
 ### Frontend
 
-- **React with TypeScript:** Used React with typescript for building components
-- **Zustand:** for state management
+- **React Vite with TypeScript:** Used React with typescript for building components
+- **Zustand:** for handling state management
 - **Material UI:** For designing the user interface
 - **WebSocket Client:** Real-time communication with the server
 
@@ -49,6 +53,10 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 
 - **Docker Containerization:** Each service is containerized for consistent deployment
 - **Nginx:** Used as a reverse proxy in production
+
+### Testing 
+
+Added Comprehensive unit test using jest and react testing library
 
 ### Development Tools
 
@@ -122,6 +130,12 @@ docker compose up -d
 
 Then visit the IP address of your VM/server to access the application.
 
+### Running Test
+
+```bash
+npm run test
+```
+
 ## Technologies Used
 
 - **Frontend:**
@@ -136,9 +150,14 @@ Then visit the IP address of your VM/server to access the application.
   - Socket.io
   - UUID
 
+- **Test**
+  - Jest
+  - React Testing library
+
 - **DevOps:**
   - Docker
   - Nginx
+
 
 ## Design Choices and Challenges
 
@@ -154,7 +173,7 @@ I decided against using next.js, since we wont utilize several features it offer
 
 There are some design choices i had to make, should i calculate the progress based on the person that highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch was not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished for example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someelse had an higher wpm, but was not the first to complete the race, it wont have player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
 
-### Disconnect Handling
+### Handling Disconnection
 
 Another thing is if a player disconnects and the number of players drops below the minimum, should that hinder the rest from actually playing. ideally this this may be a bad/good ui depending on the requirement, some games may continue play, while other stop, e.g. a p2p action game like mortal combat when fighting, if a player disconnect, the game will pause.
 
@@ -168,8 +187,7 @@ Integrating TypeScript for both frontend and backend in a single project present
 
 ## Potential Improvements
 
-- **Unit Testing:** Add comprehensive test coverage
 - **Room Selection:** Allow players to choose specific rooms instead of automatic assignment
 - **Difficulty Levels:** Allows players to choose a difficulty level
-- **Persistent Leaderboards:** We can store historical race results, this will require a db
-- **User Accounts:** Add authentication and persistent user profiles, also requires a db
+- **Persistent Leaderboards:** We can store historical race results, but this will require a db
+- **User Accounts:** Adding authentication and a user profiles, also requires a db
