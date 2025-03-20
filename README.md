@@ -116,7 +116,7 @@ npm install
 
 2. Start both the client and server:
 ```bash
-npm run dev
+npm run start
 ```
 
 3. View the application:
