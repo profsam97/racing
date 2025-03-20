@@ -30,7 +30,6 @@ export const Leaderboard: React.FC<LeaderboardProps> = ({ players }) => {
           Leaderboard
         </Typography>
       </Box>
-      
       <List sx={{ width: '100%' }}>
         {sortedPlayers.map((player, index) => (
           <React.Fragment key={player.id}>

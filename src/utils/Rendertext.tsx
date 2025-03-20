@@ -1,3 +1,4 @@
+import React from "react";
 import { Typography } from "@mui/material";
 
 interface renderTextProps {
@@ -10,21 +11,21 @@ const RenderText : React.FC<renderTextProps> = ({text, playerInput}) => {
       if (index >= playerInput.length) {
         // Not typed yet
         return (
-          <Typography component="span" key={index} sx={{ color: 'text.primary' }}>
+          <Typography component="span" key={index} sx={{ color: 'text.primary' }} data-testid="default-char">
             {char}
           </Typography>
         );
       } else if (char === playerInput[index]) {
         // Correct character
         return (
-          <Typography component="span" key={index} sx={{ color: 'success.main' }}>
+          <Typography component="span" key={index} sx={{ color: 'success.main' }} data-testid="correct-char">
             {char}
           </Typography>
         );
       } else {
         // Incorrect character
         return (
-          <Typography component="span" key={index} sx={{ color: 'error.main' }}>
+          <Typography component="span" key={index} sx={{ color: 'error.main' }} data-testid="incorrect-char">
             {playerInput[index] || char}
           </Typography>
         );

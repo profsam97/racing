@@ -100,7 +100,7 @@ export const TypingArea: React.FC = () => {
         )}
         
         {timeLeft === 0 && !isCompleted && (
-          <Typography sx={{ mt: 2, color: 'error.main', fontWeight: 500 }}>
+          <Typography  data-testid="incomplete" sx={{ mt: 2, color: 'error.main', fontWeight: 500 }}>
             Time's up! Better luck next time!
           </Typography>
         )}

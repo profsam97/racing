@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Grid2, Container } from '@mui/material';
 import { useGameStore } from './store';
 import { useEffect, useState } from 'react';

@@ -1,108 +1,175 @@
-# Type Racing Multiplaying game
+# Typing Race - Multiplayer Racing Game
 
-This repository is home to a full stack application for a real-time multiplayer typing racing game. 
+This repository hosts a full-stack real-time multiplayer typing racing game where players compete to type text passages as quickly and accurately as possible.
 
-You view on production here [https://dos7173mxyz0u.cloudfront.net](https://dos7173mxyz0u.cloudfront.net) 
+You can view the production version here: [https://dos7173mxyz0u.cloudfront.net](https://dos7173mxyz0u.cloudfront.net)
 
-## Features
+## Game Features
 
-- **Real time Multiplayer:**
+### Multiplayer Mechanics
 
-  - **No of players:** This game kickoffs when there are at least 4 players
-  - **Username:** Allows players to input a username.
-  - **On disconnect:** if a player disconnects and the number of players drop below the minimum, which is 4. the game pause until the number of players become 4 or more, i explained more at the note section.
-  - **Realtime Progress:** All users can monitor/view their progress in realtime.
+- **Player Requirements:** The game requires at least 4 players to start
+- **Username System:** Players can create a personalized racing identity
+- **Disconnect Handling:** If a player disconnects and the count drops below 4, the game pauses until enough players rejoin
+- **Real-time Progress:** All players can see everyone's position on the race track in real-time
 
-- **UI:**
+### Racing Interface
 
-  - **Leaderboard:** A leaderboard component that displays players rank in realtime.
-  - **Typing Area:** Allows users to type the words.
-  - **Rendertext:** Shows green for correct characters and red for wrong characters.
-  - **Prevent Copy/pasting:** Prevent users from copying the text and pasting the text in t.
-  - **Disable on Completion:** Prevent players from typing once the text has been completed/timer is up or paused .
-  - **Feedback:** Shows suitable feedback such as a success text onces the player finishes typing or error when player is still typing but time is up.
+- **Race Track Visualization:** Visual representation of each player's car moving across the track
+- **Typing Area:** Interactive text input area with real-time feedback
+- **Text Rendering:** Color-coded feedback (green for correct characters, red for incorrect)
+- **Leaderboard:** Real-time ranking of players based on progress and typing speed
+- **Game States:** Different states including waiting, countdown, racing, and finished
 
-## Other Features
+### Typing Mechanics
 
-### Dockerization
+- **WPM Calculation:** Words Per Minute calculation based on typing speed
+- **Accuracy Tracking:** Percentage of correctly typed characters
+- **Copy/Paste Prevention:** Prevents players from cheating by copying the text
+- **Input Validation:** Disables typing when the game is paused, finished, or when the player completes the text
+- **Visual Feedback:** Success message on completion or error message when time runs out
 
-Each service is containerized using **Docker**, ensuring consistent deployment across environments.
+## Technical Implementation
 
-### Husky for Development
+### Frontend
 
-I've set up **Husky** to streamline development workflows. It enforces code quality checks and runs tests before commits.
+- **React with TypeScript:** Used React with typescript for building components
+- **Zustand:** for state management
+- **Material UI:** For designing the user interface
+- **WebSocket Client:** Real-time communication with the server
+
+### Backend
+
+- **Node.js:** Server-side JavaScript runtime
+- **Socket.io:** Real-time bidirectional event-based communication
+- **Game Room Management:** Dynamic creation and management of game rooms
+- **State Synchronization:** Keeps all players' game states in sync
+
+### DevOps & Deployment
+
+- **Docker Containerization:** Each service is containerized for consistent deployment
+- **Nginx:** Used as a reverse proxy in production
+
+### Development Tools
+
+- **Husky:** Git hooks for code quality checks before commits
+- **ESLint & TypeScript:** Static code analysis and type checking
+- **Vite:** Fast development server and build tool
+
+## Architecture
+
+This application follows a client-server architecture:
+
+1. **Client Side:**
+   - React frontend with TypeScript
+   - WebSocket connection for real-time updates
+   - State management with Zustand
+   - UI components with Material UI
+
+2. **Server Side:**
+   - Node.js server with Socket.io
+   - Game room management system
+   - Player progress tracking
+   - Game state management
+
+3. **Communication:**
+   - Real-time bidirectional communication via WebSockets
+   - Event-based architecture for game state updates
+
+## Game Mechanics Deep Dive
+
+### Player Progress Calculation
+
+The game calculates player progress based on the percentage of correctly typed characters relative to the total text length. Players are ranked primarily by their progress percentage, with WPM (Words Per Minute) used as a tiebreaker when multiple players have the same progress.
+
+### Race Completion Logic
+
+When a player completes the text, they are ranked based on the order of completion. If multiple players complete the race simultaneously, they are ranked by their WPM. This ensures fair competition even if players don't start typing at exactly the same time.
+
+### Disconnect Handling
+
+If a player disconnects and the player count drops below the minimum (4), the game pauses to maintain competitive fairness. This design choice ensures that the game remains balanced and that the odds of winning don't suddenly increase for remaining players.
 
 ## Getting Started
-Clone the repository:
+
+### Clone the Repository
 
 ```bash
 git clone https://github.com/profsam97/racing.git
-```
-then 
-```bash
 cd racing
 ```
-### Running the app
 
-There are two ways to achieve this:
-1. `Run locally`
+### Running Locally
 
-First, install the dependencies:
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-#### Then start the dev and server
-
-The below command will start both the server and the client
+2. Start both the client and server:
 ```bash
-npm run dev 
+npm run dev
 ```
-## VIew the app
-### view by visiting localhost:5173
-Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
 
-2. `Run in a Docker environment`
+3. View the application:
+Open [http://localhost:5173](http://localhost:5173) in your browser
+
+### Running with Docker
 
 ```bash
-docker compose up -d.
+docker compose up -d
 ```
-### To see the app visit ip address of the vm/server
 
-### Technologies Used
+Then visit the IP address of your VM/server to access the application.
 
-- Typescript
-- Node.js
-- React.js
-- Socket.io 
-- Docker
-- Zustand
-- MUI
-- Uuid
-- Websocket
+## Technologies Used
 
+- **Frontend:**
+  - TypeScript
+  - React.js
+  - Zustand (State Management)
+  - Material UI
+  - Socket.io Client
 
-## Design Choices and challanages 
+- **Backend:**
+  - Node.js
+  - Socket.io
+  - UUID
 
-### Challange
- 
-### Player Progress
-There are some design choices i had to make, should i calculate the progress based on the person that highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch was not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished for example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someelse had an higher wpm, but was not the first to complete the race, it wont have player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
+- **DevOps:**
+  - Docker
+  - Nginx
 
-#### On disconnect
-Another thing is if a player disconnects and the number of players drops below the minimum, should that hinder the rest from actually playing. ideally this this may be a bad/good ui depending on the requirement, some games may continue play, while other stop, e.g. a p2p action game like mortal combat when fighting, if a player disconnect, the game will pause.
-Another approach will be rather than pausing the game, we can make the player's car to appear static this way others wont have to wait and they wont know the player got disconnected. 
+## Design Choices and Challenges
 
-While this approach may have a better UI/UX, its actually has a major con, if there were 4 players initially and 2 got disconnected, the both players left now has about 50% chance of winning as compared to 25% previously, which makes the game less competitive. 
+### Player Progress Visualization
 
-
-#### Typescript compilation
-
-Another major challange i faced was due to typescript compilation, i am used to having seperate front and backend sevice, where i used tsnode for the later. however since the frontend and backend were in the same project, tsnode was having issues setting the package.json type to module which vite(the frontend) required, but after much research i made use of tsx. 
+The race track visualizes player progress in real-time, with cars moving across the track based on typing progress. This provides immediate visual feedback on each player's performance relative to others.
 
 #### tech stack
+
 I decided against using next.js, since we wont utilize several features it offers such as serverside rendering, file based routing, server actions and more. I made use of vite, as its very lean and fit the requirement.
 
+### Player Ranking System
 
-## Potential Improvement
-Writing unit test, and also a list of server players can decide to join, rather than just joining random rooms that are waiting for players to join.
+There are some design choices i had to make, should i calculate the progress based on the person that highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch was not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished for example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someelse had an higher wpm, but was not the first to complete the race, it wont have player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
+
+### Disconnect Handling
+
+Another thing is if a player disconnects and the number of players drops below the minimum, should that hinder the rest from actually playing. ideally this this may be a bad/good ui depending on the requirement, some games may continue play, while other stop, e.g. a p2p action game like mortal combat when fighting, if a player disconnect, the game will pause.
+
+Another approach will be rather than pausing the game, we can make the player's car to appear static this way others wont have to wait and they wont know the player got disconnected.
+
+While this approach may have a better UI/UX, its actually has a major con, if there were 4 players initially and 2 got disconnected, the both players left now has about 50% chance of winning as compared to 25% previously, which makes the game less competitive.
+
+### TypeScript Configuration
+
+Integrating TypeScript for both frontend and backend in a single project presented challenges, particularly with module types. The solution involved using TSX for server-side TypeScript execution while maintaining compatibility with Vite's module requirements.
+
+## Potential Improvements
+
+- **Unit Testing:** Add comprehensive test coverage
+- **Room Selection:** Allow players to choose specific rooms instead of automatic assignment
+- **Difficulty Levels:** Allows players to choose a difficulty level
+- **Persistent Leaderboards:** We can store historical race results, this will require a db
+- **User Accounts:** Add authentication and persistent user profiles, also requires a db

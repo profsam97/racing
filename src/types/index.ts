@@ -19,7 +19,6 @@ export interface Player {
     playerCount: number;
   }
   
-  
   export interface GameStore {
     gameState: GameState;
     playerInput: string;

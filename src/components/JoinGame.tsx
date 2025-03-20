@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 
 interface JoinGameProps {
@@ -42,6 +43,7 @@ const JoinGame : React.FC<JoinGameProps> = ({handleJoinGame, username, setUserna
               
               <Box
                 component="form"
+                role="form"
                 onSubmit={handleJoinGame}
                 sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
               >
