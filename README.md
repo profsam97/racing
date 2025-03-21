@@ -6,7 +6,6 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 
 [Click here to jump to setup](#getting-started)
 
-
 ## Game Features
 
 ### Multiplayer Mechanics
@@ -27,11 +26,11 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 
 ### Typing Mechanics
 
-- **WPM Calculation:** Words Per Minute calculation based on typing speed
-- **Accuracy Tracking:** Percentage of correctly typed characters
-- **Copy/Paste Prevention:** Prevents players from cheating by copying the text
+- **WPM Calculation:** Words Per Minute calculation based on typing speed.
+- **Accuracy Tracking:** Percentage of correctly typed characters.
+- **Copy/Paste Prevention:** Prevents players from cheating by copying the text.
 - **Input Validation:** Disables typing when the game is paused, finished, or when the player completes the text
-- **Visual Feedback:** Success message on completion or error message when time runs out
+- **Visual Feedback:** Success message on completion or error message when time runs out.
 
 ## Technical Implementation
 
@@ -52,7 +51,7 @@ You can view the production version here: [https://dos7173mxyz0u.cloudfront.net]
 ### DevOps & Deployment
 
 - **Docker Containerization:** Each service is containerized for consistent deployment
-- **Nginx:** Used as a reverse proxy in production
+- **Nginx:** Used as a reverse proxy in production.
 
 ### Testing 
 
@@ -165,21 +164,21 @@ npm run test
 
 The race track visualizes player progress in real-time, with cars moving across the track based on typing progress. This provides immediate visual feedback on each player's performance relative to others.
 
-#### tech stack
+#### Tech Stack
 
 I decided against using next.js, since we wont utilize several features it offers such as serverside rendering, file based routing, server actions and more. I made use of vite, as its very lean and fit the requirement.
 
 ### Player Ranking System
 
-There are some design choices i had to make, should i calculate the progress based on the person that highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch was not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished for example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someelse had an higher wpm, but was not the first to complete the race, it wont have player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
+There are some design choices i had to make, should i calculate the progress based on the person that has the highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch is that not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished. For example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someone else had an higher wpm, but was not the first to complete the race, it wont have affect player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
 
 ### Handling Disconnection
 
 Another thing is if a player disconnects and the number of players drops below the minimum, should that hinder the rest from actually playing. ideally this this may be a bad/good ui depending on the requirement, some games may continue play, while other stop, e.g. a p2p action game like mortal combat when fighting, if a player disconnect, the game will pause.
 
-Another approach will be rather than pausing the game, we can make the player's car to appear static this way others wont have to wait and they wont know the player got disconnected.
+Another approach will be, rather than pausing the game, we can make the player's car to appear static this way others wont have to wait and they wont know the player got disconnected.
 
-While this approach may have a better UI/UX, its actually has a major con, if there were 4 players initially and 2 got disconnected, the both players left now has about 50% chance of winning as compared to 25% previously, which makes the game less competitive.
+While this approach may have a better UI/UX, its actually has a major con. If there were 4 players initially and 2 got disconnected, the both players left now has about 50% chance of winning as compared to 25% previously, which makes the game less competitive.
 
 ### TypeScript Configuration
 
@@ -189,5 +188,5 @@ Integrating TypeScript for both frontend and backend in a single project present
 
 - **Room Selection:** Allow players to choose specific rooms instead of automatic assignment
 - **Difficulty Levels:** Allows players to choose a difficulty level
-- **Persistent Leaderboards:** We can store historical race results, but this will require a db
-- **User Accounts:** Adding authentication and a user profiles, also requires a db
+- **Persistent Leaderboards:** We can store historical race results, but this will require a db.
+- **User Accounts:** Adding authentication and a user profiles, also requires a db.
