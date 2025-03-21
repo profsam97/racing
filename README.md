@@ -172,6 +172,10 @@ I decided against using next.js, since we wont utilize several features it offer
 
 There are some design choices i had to make, should i calculate the progress based on the person that has the highest wpm/accuracy, because if everyone started same time, the person that has the highest wpm will be the first, but the catch is that not everyone may start at the same time and if thats the case the person who has the highest wpm may not actually be the first to finish since they may/may not start immediately with the others, but have a better/higher wpm. What i did was to sort the players based on the progress they made and then rank them based on the time they finished. For example if player 1 started immediately with a 56wpm and was the first to complete the race, he will be ranked first regardless of his wpm. So even though someone else had an higher wpm, but was not the first to complete the race, it wont have affect player 1. now if player 1 and player 2 complete the race at the same time, we rank them based on the wpm.
 
+## Handling Late comers
+
+Intially, when a player tried to join a game when others had begun, i provided a feedback to the player that game has begun, and he/she should wait still the game has ended, but this is a poor design in terms of user experience. So, I changed my approach to having something called a server/room. When a player tries to join, we check all servers to see if there is any one available for the player to join. If there is, then the player get added to the room else, we create a new server/room for that player and he/she will wait  until its get to the minimum number which is 4.
+
 ### Handling Disconnection
 
 Another thing is if a player disconnects and the number of players drops below the minimum, should that hinder the rest from actually playing. ideally this this may be a bad/good ui depending on the requirement, some games may continue play, while other stop, e.g. a p2p action game like mortal combat when fighting, if a player disconnect, the game will pause.
@@ -179,6 +183,7 @@ Another thing is if a player disconnects and the number of players drops below t
 Another approach will be, rather than pausing the game, we can make the player's car to appear static this way others wont have to wait and they wont know the player got disconnected.
 
 While this approach may have a better UI/UX, its actually has a major con. If there were 4 players initially and 2 got disconnected, the both players left now has about 50% chance of winning as compared to 25% previously, which makes the game less competitive.
+
 
 ### TypeScript Configuration
 
