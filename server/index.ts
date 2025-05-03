@@ -19,7 +19,7 @@ const io = new Server(httpServer, {
   }
 });
 const GAME_DURATION = 80;  // 80 seconds
-const MIN_PLAYERS_TO_START = 4;
+const MIN_PLAYERS_TO_START = 2;
 
 // Store all game rooms
 const gameRooms = new Map<string, GameRoom>();

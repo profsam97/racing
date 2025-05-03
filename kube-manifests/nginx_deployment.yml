@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+   name: backend-deploy
+   namespace: dev
+   labels:
+     tier: backend 
+
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend 
+  template: 
+    metadata:
+      labels:
+        app: backend
+    spec: 
+      containers:
+      - image: CONTAINER_IAMGE
+        name:  backend-server 
+        ports:
+        - name:  "backend-port"
+          containerPort:  3000
+        env:
+          - name:  PORT
+            value:  "3000"
+        livenessProbe:
+            exec:
+              command: 
+                - /bin/sh
+                - -c 
+                - nc -z localhost 3000
+            initialDelaySeconds: 20
+            periodSeconds: 10
