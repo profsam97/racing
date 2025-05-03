@@ -17,7 +17,7 @@ spec:
         app: backend
     spec: 
       containers:
-      - image: CONTAINER_IAMGE
+      - image: CONTAINER_IMAGE
         name:  backend-server 
         ports:
         - name:  "backend-port"

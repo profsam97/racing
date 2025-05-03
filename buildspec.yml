@@ -9,7 +9,7 @@ phases:
         - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
         # Update Image tag in our Kubernetes Deployment Manifest        
         - echo "Update Image tag in kube-manifest..."
-        # remember we specified   CONTAINER_IAMGE in the deployment manifest, we use sed to find and replace
+        # remember we specified   CONTAINER_IMAGE in the deployment manifest, we use sed to find and replace
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URL:$TAG"'@' kube-manifests/nginx_deployment.yml
         # Verify AWS CLI Version        
         - echo "Verify AWS CLI Version..."
